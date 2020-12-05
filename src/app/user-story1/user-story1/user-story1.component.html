@@ -9,11 +9,11 @@
     <thead class="thead-dark">
       <tr>
 
-        <th scope="col">Title</th>
-        <th scope="col">Priority</th>
-        <th scope="col">Reporter</th>
-        <th scope="col">Date Created</th>
-        <th scope="col">Status</th>
+        <th (click)="sortTable('title', true)" scope="col">Title</th>
+        <th (click)="sortTable('priority', true)" scope="col">Priority</th>
+        <th (click)="sortTable('reporter', true)" scope="col">Reporter</th>
+        <th (click)="sortTable('createdAt', true)" scope="col">Date Created</th>
+        <th (click)="sortTable('status', true)" scope="col">Status</th>
       </tr>
     </thead>
     <tbody>

@@ -14,27 +14,31 @@ import { BugsImport } from './bugs-import';
 
 export class UserStory1Component implements OnInit {
 
-  // sortTable(colNum){
+  sortArray: boolean [];
+  
 
-  // }
+  
+
+  sortTable(columnName: any, order : boolean) {
 
 
 
-  datas: BugsImport[] = [{
+    this.service.getSorted(columnName, order).subscribe(result => {
+      this.datas = []
+      this.datas = result
+      console.log(result)
+    });
+  }
 
-    title: '',
-    priority: '',
-    reporter: '',
-    status: '',
-    createdAt: ''
 
-  }]
+
+  datas: BugsImport[];
 
   constructor(private service: ImportServiceService) { }
 
   ngOnInit() {
 
-    this.service.getFields().subscribe((result: any[]) =>
+    this.service.getFields().subscribe(result =>
 
       this.datas = result);
   }
