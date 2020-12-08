@@ -3,19 +3,30 @@
 
 <body ng-app>
 
-
-
+  
+  
   <table class="table">
     <thead class="thead-dark">
       <tr>
-
-        <th (click)="sortTable('title', true)" scope="col">Title</th>
-        <th (click)="sortTable('priority', true)" scope="col">Priority</th>
-        <th (click)="sortTable('reporter', true)" scope="col">Reporter</th>
-        <th (click)="sortTable('createdAt', true)" scope="col">Date Created</th>
-        <th (click)="sortTable('status', true)" scope="col">Status</th>
+        <th scope="col">
+          <button (click)="sortTable('title')">Sort by:</button>Title
+        </th>
+        <th scope="col">
+          <button (click)="sortTable('priority')">Sort by:</button>Priority
+        </th>
+        <th scope="col">
+          <button (click)="sortTable('reporter')">Sort by:</button>Reporter
+        </th>
+        <th scope="col">
+          <button (click)="sortTable('createdAt')">Sort by:</button>Date Created
+        </th>
+        <th scope="col">
+          <button (click)="sortTable('status')">Sort by:</button>Status
+        </th>
       </tr>
     </thead>
+
+
     <tbody>
       <tr *ngFor="let data of datas;">
 
@@ -26,22 +37,8 @@
         <td>{{data.status}}</td>
       </tr>
 
-
-
-
-
-
-
-
-
     </tbody>
 
   </table>
-
-
-
-
-
-
 
 </body>

@@ -14,21 +14,29 @@ import { BugsImport } from './bugs-import';
 
 export class UserStory1Component implements OnInit {
 
-  sortArray: boolean [];
-  
 
-  
+  sortArray: number[] = [0, 0, 0, 0, 0];
+  order: string;
+  sortTable(columnName: string) {
 
-  sortTable(columnName: any, order : boolean) {
+    if (columnName == "title" && this.sortArray[0] == 0) { this.sortArray[0] = 1; this.order = "asc"; }
+    else if (columnName == "title" && this.sortArray[0] == 1) { this.sortArray[0] = 0; this.order = "desc"; }
+    else if (columnName == "priority" && this.sortArray[0] == 0) { this.sortArray[0] = 1; this.order = "asc"; }
+    else if (columnName == "priority" && this.sortArray[0] == 1) { this.sortArray[0] = 0; this.order = "desc"; }
+    else if (columnName == "reporter" && this.sortArray[0] == 0) { this.sortArray[0] = 1; this.order = "asc"; }
+    else if (columnName == "reporter" && this.sortArray[0] == 1) { this.sortArray[0] = 0; this.order = "desc"; }
+    else if (columnName == "createdAt" && this.sortArray[0] == 0) { this.sortArray[0] = 1; this.order = "asc"; }
+    else if (columnName == "createdAt" && this.sortArray[0] == 1) { this.sortArray[0] = 0; this.order = "desc"; }
+    else if (columnName == "status" && this.sortArray[0] == 0) { this.sortArray[0] = 1; this.order = "asc"; }
+    else if (columnName == "status" && this.sortArray[0] == 1) { this.sortArray[0] = 0; this.order = "desc"; }
 
-
-
-    this.service.getSorted(columnName, order).subscribe(result => {
+    this.service.getSorted(columnName, this.order).subscribe(result => {
       this.datas = []
       this.datas = result
       console.log(result)
     });
   }
+
 
 
 
@@ -41,6 +49,9 @@ export class UserStory1Component implements OnInit {
     this.service.getFields().subscribe(result =>
 
       this.datas = result);
+
+
   }
+
 
 }

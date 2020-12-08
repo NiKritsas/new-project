@@ -17,10 +17,14 @@ export class ImportServiceService {
 
 
 
-  getSorted(field: string, order: string | boolean ): Observable<BugsImport[]> {
+  getSorted(field: string, order : string ): Observable<BugsImport[]> {
 
     return this.http.get<BugsImport[]>('https://bug-report-system-server.herokuapp.com/bugs?sort=' + field + ',' + order);
   }
+
+  // getCreate(): Observable<BugsImport[]>{
+  //   return this.http.get<BugsImport[]>()
+  // }
 
 }
 //https://bug-report-system-server.herokuapp.com/bugs?sort=title,desc

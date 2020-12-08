@@ -1,18 +1,31 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { RouterModule, Routes } from '@angular/router'
 import { AppComponent } from './app.component';
 import { UserStory1Module } from './user-story1/user-story1.module';
+import { CreateNewBugComponent } from './create-newbug/create-new-bug/create-new-bug.component';
+import { UserStory1Component } from './user-story1/user-story1/user-story1.component';
+import { CreateNewbugModule } from './create-newbug/create-newbug.module';
+
+const routes: Routes = [
+  {path: '', component: UserStory1Component},
+  {path: 'createNewBug', component: CreateNewBugComponent}
+]
+
 
 @NgModule({
   declarations: [
     AppComponent
     
+    
+    
   ],
   imports: [
     BrowserModule,
-    UserStory1Module
+    UserStory1Module,
+    RouterModule.forRoot(routes),
     
+    CreateNewbugModule
     
   ],
   providers: [],
