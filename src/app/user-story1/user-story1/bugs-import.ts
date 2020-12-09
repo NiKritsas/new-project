@@ -6,7 +6,7 @@ export interface BugsImport {
     reporter: string;
     status: string;
     updatedAt?: string;
-    createdAt: string;
+    createdAt?: string;
     comments?: [
         {
             _id: string;

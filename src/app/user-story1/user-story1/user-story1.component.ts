@@ -33,7 +33,7 @@ export class UserStory1Component implements OnInit {
     this.service.getSorted(columnName, this.order).subscribe(result => {
       this.datas = []
       this.datas = result
-      console.log(result)
+      // console.log(result)
     });
   }
 

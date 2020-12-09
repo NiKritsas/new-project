@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CreateNewBugComponent } from './create-new-bug/create-new-bug.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 
 
@@ -9,7 +10,8 @@ import { ReactiveFormsModule } from '@angular/forms';
   declarations: [CreateNewBugComponent],
   imports: [
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   exports:[CreateNewBugComponent]
 })
