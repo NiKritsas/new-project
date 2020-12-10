@@ -22,9 +22,8 @@ export class ImportServiceService {
     return this.http.get<BugsImport[]>('https://bug-report-system-server.herokuapp.com/bugs?sort=' + field + ',' + order);
   }
 
-  // getCreate(): Observable<BugsImport[]>{
-  //   return this.http.get<BugsImport[]>()
-  // }
-
+  getBugsId(id: string): Observable<BugsImport> {
+    return this.http.get<BugsImport>('https://bug-report-system-server.herokuapp.com/bugs/' + id);
+  }
+  
 }
-//https://bug-report-system-server.herokuapp.com/bugs?sort=title,desc

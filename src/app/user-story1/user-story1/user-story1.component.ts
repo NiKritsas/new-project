@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ImportServiceService } from '../import-service.service';
 import { BugsImport } from './bugs-import';
-
+import {Router} from '@angular/router'
 
 @Component({
   selector: 'app-user-story1',
@@ -33,7 +33,7 @@ export class UserStory1Component implements OnInit {
     this.service.getSorted(columnName, this.order).subscribe(result => {
       this.datas = []
       this.datas = result
-      // console.log(result)
+      
     });
   }
 
@@ -42,7 +42,7 @@ export class UserStory1Component implements OnInit {
 
   datas: BugsImport[];
 
-  constructor(private service: ImportServiceService) { }
+  constructor(private service: ImportServiceService, private router: Router) { }
 
   ngOnInit() {
 
@@ -51,6 +51,10 @@ export class UserStory1Component implements OnInit {
       this.datas = result);
 
 
+  }
+
+  editButtonClick(dataId: string){
+    this.router.navigate(['/editBug', dataId]);
   }
 
 

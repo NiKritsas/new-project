@@ -8,19 +8,22 @@
     <thead class="thead-dark">
       <tr>
         <th scope="col">
-          <button (click)="sortTable('title')">Sort by:</button>Title
+          <button class="btn btn-light" (click)="sortTable('title')">Title</button>
         </th>
         <th scope="col">
-          <button (click)="sortTable('priority')">Sort by:</button>Priority
+          <button class="btn btn-light" (click)="sortTable('priority')">Priority</button>
         </th>
         <th scope="col">
-          <button (click)="sortTable('reporter')">Sort by:</button>Reporter
+          <button class="btn btn-light" (click)="sortTable('reporter')">Reporter</button>
         </th>
         <th scope="col">
-          <button (click)="sortTable('createdAt')">Sort by:</button>Date Created
+          <button class="btn btn-light" (click)="sortTable('createdAt')">Date Created</button>
         </th>
         <th scope="col">
-          <button (click)="sortTable('status')">Sort by:</button>Status
+          <button class="btn btn-light" (click)="sortTable('status')">Status</button>
+        </th>
+        <th scope="col">
+          
         </th>
       </tr>
     </thead>
@@ -34,6 +37,7 @@
         <td>{{data.reporter}}</td>
         <td>{{data.createdAt}}</td>
         <td>{{data.status}}</td>
+        <td><button class="btn btn-primary" (click)="editButtonClick(data.id)">Edit</button></td>
       </tr>
 
     </tbody>

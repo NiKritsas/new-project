@@ -10,7 +10,8 @@ import { HttpClientModule } from '@angular/common/http';
 
 const routes: Routes = [
   {path: '', component: UserStory1Component},
-  {path: 'createNewBug', component: CreateNewBugComponent}
+  {path: 'createNewBug', component: CreateNewBugComponent},
+  {path: 'editBug/:id', component: CreateNewBugComponent}
 ]
 
 

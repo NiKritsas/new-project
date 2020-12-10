@@ -1,5 +1,5 @@
 export interface BugsImport {
-    id?: string;
+    id: string;
     title: string;
     description?: string;
     priority: string;
