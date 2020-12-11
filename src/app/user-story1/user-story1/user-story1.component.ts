@@ -57,5 +57,11 @@ export class UserStory1Component implements OnInit {
     this.router.navigate(['/editBug', dataId]);
   }
 
+  deleteBug(dataId:string){
+    this.service.deleteBug(dataId).subscribe(
+      ()=> console.log('Bug with Id=' + dataId + 'deleted'),
+      (err)=> console.log(err)
+    )
+  }
 
 }

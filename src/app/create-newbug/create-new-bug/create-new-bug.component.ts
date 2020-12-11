@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {  FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PostService } from '../post.service';
 import { BugsImport } from 'src/app/user-story1/user-story1/bugs-import';
 import {ActivatedRoute} from '@angular/router';
@@ -20,8 +20,7 @@ export class CreateNewBugComponent implements OnInit {
   
   bugId: string;
 
-
-
+  
   constructor(private fb: FormBuilder,
              private postBug: PostService,
              private route: ActivatedRoute,
@@ -30,7 +29,15 @@ export class CreateNewBugComponent implements OnInit {
 
 
   ngOnInit() {
+    this.newBugForm = this.fb.group({
+      title:['', Validators.required],
+      description:['', Validators.required],
+      priority: ['', Validators.required],
+      reporter:['', Validators.required],
+      status:['']
     
+    
+    })
 
 
     this.newBugForm.get('reporter').valueChanges.subscribe((value) => {
@@ -52,7 +59,8 @@ export class CreateNewBugComponent implements OnInit {
         this.getBug(this.bugId);
       }
     })
-    
+
+       
   }
   
   
@@ -89,7 +97,6 @@ export class CreateNewBugComponent implements OnInit {
     this.router.navigate(['/'])
     
   }
-
 
 
 

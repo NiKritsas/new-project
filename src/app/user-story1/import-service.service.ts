@@ -25,5 +25,9 @@ export class ImportServiceService {
   getBugsId(id: string): Observable<BugsImport> {
     return this.http.get<BugsImport>('https://bug-report-system-server.herokuapp.com/bugs/' + id);
   }
+
+  deleteBug(dataId: string): Observable<void> {
+    return this.http.delete<void>('https://bug-report-system-server.herokuapp.com/bugs/' + dataId);
+  }
   
 }
