@@ -37,7 +37,11 @@ export class UserStory1Component implements OnInit {
     });
   }
 
+  displayPage (){
+    this.service.getFields().subscribe(result =>
 
+      this.datas = result);
+  }
 
 
   datas: BugsImport[];
@@ -46,9 +50,7 @@ export class UserStory1Component implements OnInit {
 
   ngOnInit() {
 
-    this.service.getFields().subscribe(result =>
-
-      this.datas = result);
+    this.displayPage()
 
 
   }
@@ -57,16 +59,18 @@ export class UserStory1Component implements OnInit {
     this.router.navigate(['/editBug', dataId]);
   }
 
+  
+
   deleteBug(dataId:string){
     this.service.deleteBug(dataId).subscribe(
-      ()=> console.log('Bug with Id=' + dataId + 'deleted'),
-      (err)=> console.log(err)
-    )
-    //this.router.navigate(['/'])
+    ()=>{ console.log('Bug with Id=' + dataId + 'deleted'),
+      (err)=> console.log(err),
+      this.displayPage ()
+      this.router.navigate(['/'])
 
-    setTimeout(()=> {
-      window.location.reload();
-    }, 100); 
+      
+      })
+    
   }
 
 }
