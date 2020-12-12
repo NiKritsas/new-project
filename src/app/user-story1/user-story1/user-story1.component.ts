@@ -62,6 +62,11 @@ export class UserStory1Component implements OnInit {
       ()=> console.log('Bug with Id=' + dataId + 'deleted'),
       (err)=> console.log(err)
     )
+    //this.router.navigate(['/'])
+
+    setTimeout(()=> {
+      window.location.reload();
+    }, 100); 
   }
 
 }

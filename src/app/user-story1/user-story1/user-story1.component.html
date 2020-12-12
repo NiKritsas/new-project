@@ -1,9 +1,7 @@
-
-
 <body ng-app>
 
-  
-  
+
+
   <table class="table">
     <thead class="thead-dark">
       <tr>
@@ -23,10 +21,9 @@
           <button class="btn btn-light" (click)="sortTable('status')">Status</button>
         </th>
         <th scope="col">
-          
         </th>
         <th scope="col">
-          
+
         </th>
       </tr>
     </thead>
@@ -41,7 +38,7 @@
         <td>{{data.createdAt}}</td>
         <td>{{data.status}}</td>
         <td><button class="btn btn-primary" (click)="editButtonClick(data.id)">Edit</button></td>
-        <td><button class="btn btn-danger" (click)="deleteBug(data.id)" >Delete</button></td>
+        <td><button class="btn btn-danger" (click)="deleteBug(data.id)">Delete</button></td>
       </tr>
 
     </tbody>

@@ -34,7 +34,9 @@ export class CreateNewBugComponent implements OnInit {
       description:['', Validators.required],
       priority: ['', Validators.required],
       reporter:['', Validators.required],
-      status:['']
+      status:[''],
+      commDescription:[''],
+      commName:['']
     
     
     })
@@ -85,16 +87,23 @@ export class CreateNewBugComponent implements OnInit {
     let newBug: BugsImport = this.newBugForm.value;
 
     if(this.bugId){
-      this.postBug.editBug(this.bugId, newBug).subscribe((result) => console.log(result))
-      
+      this.postBug.editBug(this.bugId, newBug).subscribe((result) =>{
+         console.log(result)
+      this.router.navigate(['/'])
+      })
     }else{
       
-      this.postBug.addBug(newBug).subscribe((result) => console.log(result))
+      this.postBug.addBug(newBug).subscribe((result) =>{
+         console.log(result)
+         this.router.navigate(['/'])
+      })
       console.log('perase')
+      
     }
     
+ 
 
-    this.router.navigate(['/'])
+    
     
   }
 
