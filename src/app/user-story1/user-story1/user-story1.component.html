@@ -1,14 +1,51 @@
 <body ng-app>
+ 
+ 
 
-
-
-  <table class="table">
+  <table class="table table-bordered">
+   
     <thead class="thead-dark">
+      <tr>
+        <th scope="col">
+          <input type="search" id="titleSearchInput" placeholder="Search title">
+        </th>
+        <th scope="col">
+         <select id="prioritySearchInput">
+          <option >Select</option>
+          <option value="1">Minor</option>
+          <option value="2">Major</option>
+          <option value="3">Critical</option>
+        </select>
+        </th>
+        <th scope="col">
+          <select id="reporterSearchInput">
+            <option>Select</option>
+            <option>QA</option>
+            <option>PO</option>
+            <option>DEV</option>
+          </select>
+        </th>
+        <th scope="col">
+          <input type="search" id="dateSearchInput" placeholder="Search date">
+        </th>
+        <th scope="col">
+          <select id="statusSearchInput">
+            <option>Select</option>
+            <option>Ready for testing</option>
+            <option>Done</option>
+            <option>Rejected</option>
+          </select>
+        </th>
+        <th colspan="2">
+          <button class="btn btn-primary btn-sm btn-block">Search</button>
+        </th>
+      </tr>
+      
       <tr>
         <th scope="col">
           <button class="btn btn-light" (click)="sortTable('title')">Title</button>
         </th>
-        <th scope="col">
+        <th scope="col">          
           <button class="btn btn-light" (click)="sortTable('priority')">Priority</button>
         </th>
         <th scope="col">
@@ -20,17 +57,15 @@
         <th scope="col">
           <button class="btn btn-light" (click)="sortTable('status')">Status</button>
         </th>
-        <th scope="col">
+        <th colspan="2" scope="col">
         </th>
-        <th scope="col">
-
-        </th>
+        
       </tr>
     </thead>
 
 
     <tbody>
-      <tr *ngFor="let data of datas;">
+      <tr *ngFor="let data of datas;" >
 
         <td>{{data.title}}</td>
         <td>{{data.priority}}</td>
@@ -39,10 +74,31 @@
         <td>{{data.status}}</td>
         <td><button class="btn btn-primary" (click)="editButtonClick(data.id)">Edit</button></td>
         <td><button class="btn btn-danger" (click)="deleteBug(data.id)">Delete</button></td>
-      </tr>
+      </tr> 
 
     </tbody>
 
   </table>
+  <nav aria-label="Page navigation example">
+    <ul class="pagination">
+      <li class="page-item">
+        <a class="page-link" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+          <span class="sr-only">Previous</span>
+        </a>
+      </li>
+      <li *ngFor="let i of getPagination(datas.length); let idx = index" class="page-item">
+        <a class="page-link" (click)="changePage(idx)" >{{idx + 1 }}</a>
+      </li>
+      
+      <li class="page-item">
+        <a class="page-link"  aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+          <span class="sr-only">Next</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
 
 </body>

@@ -40,7 +40,7 @@ export class CreateNewBugComponent implements OnInit {
       reporter: ['', Validators.required],
       status: [''],
       comments: this.fb.array([
-        this.commentsInfo('commDescription')
+        this.commentsInfo('Enter text')
       ])
 
 
