@@ -72,7 +72,7 @@
         <td>{{data.reporter}}</td>
         <td>{{data.createdAt}}</td>
         <td>{{data.status}}</td>
-        <td><button class="btn btn-primary" (click)="editButtonClick(data.id)">Edit</button></td>
+        <td><button class="btn btn-primary" (click)="editButtonClick(data.id,data.title)">Edit</button></td>
         <td><button class="btn btn-danger" (click)="deleteBug(data.id)">Delete</button></td>
       </tr> 
 
@@ -88,7 +88,7 @@
         </a>
       </li>
       <li *ngFor="let i of getPagination(datas.length); let idx = index" class="page-item">
-        <a class="page-link" (click)="changePage(idx)" >{{idx + 1 }}</a>
+        <a class="page-link"  (click)="changePage(idx)" >{{idx + 1 }}</a>
       </li>
       
       <li class="page-item">

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ImportServiceService } from '../import-service.service';
 import { BugsImport } from './bugs-import';
 import { Router } from '@angular/router'
-
+var colPressed: string = " ";
 @Component({
   selector: 'app-user-story1',
   templateUrl: './user-story1.component.html',
@@ -17,21 +17,20 @@ export class UserStory1Component implements OnInit {
 
   sortArray: number[] = [0, 0, 0, 0, 0];
   order: string;
-
+  
   sortTable(columnName: string) {
-
+    colPressed = columnName;
     if (columnName == "title" && this.sortArray[0] == 0) { this.sortArray[0] = 1; this.order = "asc"; }
     else if (columnName == "title" && this.sortArray[0] == 1) { this.sortArray[0] = 0; this.order = "desc"; }
-    else if (columnName == "priority" && this.sortArray[0] == 0) { this.sortArray[0] = 1; this.order = "asc"; }
-    else if (columnName == "priority" && this.sortArray[0] == 1) { this.sortArray[0] = 0; this.order = "desc"; }
-    else if (columnName == "reporter" && this.sortArray[0] == 0) { this.sortArray[0] = 1; this.order = "asc"; }
-    else if (columnName == "reporter" && this.sortArray[0] == 1) { this.sortArray[0] = 0; this.order = "desc"; }
-    else if (columnName == "createdAt" && this.sortArray[0] == 0) { this.sortArray[0] = 1; this.order = "asc"; }
-    else if (columnName == "createdAt" && this.sortArray[0] == 1) { this.sortArray[0] = 0; this.order = "desc"; }
-    else if (columnName == "status" && this.sortArray[0] == 0) { this.sortArray[0] = 1; this.order = "asc"; }
-    else if (columnName == "status" && this.sortArray[0] == 1) { this.sortArray[0] = 0; this.order = "desc"; }
-
-    this.service.getSorted(columnName, this.order).subscribe(result => {
+    else if (columnName == "priority" && this.sortArray[1] == 0) { this.sortArray[1] = 1; this.order = "asc"; }
+    else if (columnName == "priority" && this.sortArray[1] == 1) { this.sortArray[1] = 0; this.order = "desc"; }
+    else if (columnName == "reporter" && this.sortArray[2] == 0) { this.sortArray[2] = 1; this.order = "asc"; }
+    else if (columnName == "reporter" && this.sortArray[2] == 1) { this.sortArray[2] = 0; this.order = "desc"; }
+    else if (columnName == "createdAt" && this.sortArray[3] == 0) { this.sortArray[3] = 1; this.order = "asc"; }
+    else if (columnName == "createdAt" && this.sortArray[3] == 1) { this.sortArray[3] = 0; this.order = "desc"; }
+    else if (columnName == "status" && this.sortArray[4] == 0) { this.sortArray[4] = 1; this.order = "asc"; }
+    else if (columnName == "status" && this.sortArray[4] == 1) { this.sortArray[4] = 0; this.order = "desc"; }1
+      this.service.getSorted(columnName, this.order).subscribe(result => {
       this.datas = []
       this.datas = result
 
@@ -40,7 +39,7 @@ export class UserStory1Component implements OnInit {
 
   displayPage() {
     this.service.getFields().subscribe(result =>
-
+      
       this.datas = result);
   }
 
@@ -62,30 +61,40 @@ export class UserStory1Component implements OnInit {
 
 
 
-  deleteBug(dataId: string) {
-    this.service.deleteBug(dataId).subscribe(
+  deleteBug(dataId: string,title: string) {
+    console.log(title);
+    
+    this.service.deleteBug(dataId,title).subscribe(
       () => {
-        console.log('Bug with Id=' + dataId + 'deleted'),
+        console.log('Bug with Id=' + dataId +'deleted'),
           (err) => console.log(err),
-          this.displayPage()
-        this.router.navigate(['/'])
-
-
+          location.reload();
+        //this.router.navigate(['/'])
       })
-
 
   }
   getPagination(length: number) {
-    return new Array(length / 2);
+    console.log(length);
+    
+    return new Array(length );
   }
-  changePage(idx: number) {
 
-
+  changePage(idx: number,) {
+   
+    
+    if(colPressed==" "){
     this.service.changePage(idx).subscribe(res => {
+      this.datas = []
       this.datas = res
-    }
-
-    );
+    });
+    }else{
+    this.service.getSortedPage(colPressed, this.order, idx).subscribe(result => {
+      this.datas = []
+      this.datas = result
+    });}
   }
+
 
 }
+
+
