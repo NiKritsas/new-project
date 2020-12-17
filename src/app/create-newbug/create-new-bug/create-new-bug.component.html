@@ -50,6 +50,7 @@
             <option>Done</option>
             <option>Rejected</option>
         </select>
+
     </div>
 
     <div *ngIf="bugId" class="form-group">
@@ -57,15 +58,15 @@
         <div *ngFor="let comment of comments.controls; let idx = index" [formGroup]="comment">
 
             <label>Description:</label>
-            <input formControlName="commDescription" type="text" class="form-control" id="commDescriptionInput"
+            <input formControlName="description" type="text" class="form-control" id="commDescriptionInput"
                 placeholder="Enter description">
 
             <label>Name:</label>
             <div class="d-flex align-items-center">
-                <input formControlName="commName" type="text" class="form-control" id="commNameInput"
+                <input formControlName="reporter" type="text" class="form-control" id="commNameInput"
                     placeholder="Enter name">
                 <span class="ml-4"><button class="btn btn-danger" style="border-radius:50%"
-                        (click)="revomeComments(idx)"><b>X</b></button></span>
+                        (click)="removeComments(idx)"><b>X</b></button></span>
             </div>
             <hr>
         </div>

@@ -20,6 +20,7 @@ export class CreateNewBugComponent implements OnInit {
 
   bugId: string;
 
+  //Comments:any;
 
   constructor(private fb: FormBuilder,
     private postBug: PostService,
@@ -40,8 +41,10 @@ export class CreateNewBugComponent implements OnInit {
       reporter: ['', Validators.required],
       status: [''],
       comments: this.fb.array([
-        this.commentsInfo('Enter text')
+        this.commentsInfo()
       ])
+
+
     })
 
 
@@ -71,17 +74,22 @@ export class CreateNewBugComponent implements OnInit {
   }
 
   addComments() {
-    this.comments.push(this.commentsInfo())
-  }
-  revomeComments(index:number){
-    this.comments.removeAt(index)
+    
+    this.comments.push(this.commentsInfo());
+    
+  // console.log('perase')
   }
 
-  private commentsInfo(comment?: string) {
+  removeComments(index: number) {
+    this.comments.removeAt(index)
+    // console.log('delete')
+  }
+
+  private commentsInfo(): FormGroup {
     return this.fb.group({
-      commDescription: comment,
-      commName: comment
-    })
+      description: [''],
+      reporter: ['']
+    });
   }
 
 
@@ -97,17 +105,37 @@ export class CreateNewBugComponent implements OnInit {
       description: data.description,
       priority: data.priority,
       reporter: data.reporter,
-      status: data.status
+      status: data.status,
+     // comments: this.setComments(data.comments)
     });
+   
+    this.setComments(data.comments);
+   // this.comments.push(this.setComments(data.comments));
+    
+  }
+
+  setComments(commentSets: BugsImport['comments']) {
+   
+    commentSets.forEach(c => {
+     // console.log(c)
+     
+      this.comments.push(this.fb.group({
+        description: c.description,
+        reporter: c.reporter
+      }));
+    });
+    
   }
 
   onSumbit() {
 
     let newBug: BugsImport = this.newBugForm.value;
-
+   // console.log(newBug)
     if (this.bugId) {
+
       this.postBug.editBug(this.bugId, newBug).subscribe((result) => {
-        console.log(result)
+
+        //console.log(result)
         this.router.navigate(['/'])
       })
     } else {
@@ -116,7 +144,7 @@ export class CreateNewBugComponent implements OnInit {
         console.log(result)
         this.router.navigate(['/'])
       })
-      console.log('perase')
+     // console.log('perase')
 
     }
 
