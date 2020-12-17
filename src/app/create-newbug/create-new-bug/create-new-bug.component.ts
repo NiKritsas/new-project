@@ -42,8 +42,6 @@ export class CreateNewBugComponent implements OnInit {
       comments: this.fb.array([
         this.commentsInfo('Enter text')
       ])
-
-
     })
 
 

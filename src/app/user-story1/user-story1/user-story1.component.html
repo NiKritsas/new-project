@@ -1,46 +1,45 @@
-<body ng-app>
- 
- 
 
-  <table class="table table-bordered">
-   
+<form class="form-inline" [formGroup] = "searchBugForm">
+  <div class="form-group">
+    <input formControlName="title" type="text" class="form-control" id="titleInput" placeholder="Search Title">
+  </div>
+  <div class="form-group"> 
+    <select formControlName="priority" class="form-control" id="priorityInput" placeholder="Select">
+        <option value="" >Search Prority Empty</option>
+        <option value="1">Minor</option>
+        <option value="2">Major</option>
+        <option value="3">Critical</option>
+    </select>
+  </div>
+  <div class="form-group"> 
+  <select formControlName="reporter" class="form-control" id="reporterInput" placeholder="Select">
+      <option value="" >Search Reporter Empty</option>
+      <option >QA</option>
+      <option >PO</option>
+      <option >DEV</option>
+  </select>
+  </div>
+  <div class="form-group">
+  <select formControlName="status" class="form-control" id="statusInput">
+      <option value="" >Search Status Empty</option>
+      <option>Ready for testing</option>
+      <option>Done</option>
+      <option>Rejected</option>
+  </select>
+  </div>
+  <div>
+    <button type="submit" class="btn btn-primary" 
+        (click)="searchBug()">Submit</button>
+  </div>
+</form>
+
+
+
+
+<body ng-app>
+  <table class="table table-bordered">  
     <thead class="thead-dark">
-      <tr>
-        <th scope="col">
-          <input type="search" id="titleSearchInput" placeholder="Search title">
-        </th>
-        <th scope="col">
-         <select id="prioritySearchInput">
-          <option >Select</option>
-          <option value="1">Minor</option>
-          <option value="2">Major</option>
-          <option value="3">Critical</option>
-        </select>
-        </th>
-        <th scope="col">
-          <select id="reporterSearchInput">
-            <option>Select</option>
-            <option>QA</option>
-            <option>PO</option>
-            <option>DEV</option>
-          </select>
-        </th>
-        <th scope="col">
-          <input type="search" id="dateSearchInput" placeholder="Search date">
-        </th>
-        <th scope="col">
-          <select id="statusSearchInput">
-            <option>Select</option>
-            <option>Ready for testing</option>
-            <option>Done</option>
-            <option>Rejected</option>
-          </select>
-        </th>
-        <th colspan="2">
-          <button class="btn btn-primary btn-sm btn-block">Search</button>
-        </th>
-      </tr>
-      
+         
       <tr>
         <th scope="col">
           <button class="btn btn-light" (click)="sortTable('title')">Title</button>

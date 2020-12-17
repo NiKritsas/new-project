@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ImportServiceService } from '../import-service.service';
 import { BugsImport } from './bugs-import';
-import { Router } from '@angular/router'
+import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { SearchService } from '../search.service';
+
+
 var colPressed: string = " ";
 @Component({
   selector: 'app-user-story1',
@@ -38,21 +42,24 @@ export class UserStory1Component implements OnInit {
   }
 
   displayPage() {
-    this.service.getFields().subscribe(result =>
-      
-      this.datas = result);
+    this.service.getFields().subscribe(result => this.datas = result);
   }
 
-
+  searchBugForm : FormGroup;
   datas: BugsImport[];
 
-  constructor(private service: ImportServiceService, private router: Router) { }
+  constructor(private service: ImportServiceService, private router: Router
+    ,private fb: FormBuilder, private searchService: SearchService) { }
 
   ngOnInit() {
-
     this.displayPage()
 
-
+    this.searchBugForm = this.fb.group({
+      title: [''],
+      priority: [''],
+      reporter: [''],
+      status: ['']
+    })
   }
 
   editButtonClick(dataId: string) {
@@ -94,7 +101,16 @@ export class UserStory1Component implements OnInit {
     });}
   }
 
-
+  searchBug(){
+    let searchInfo = this.searchBugForm.value;
+    console.log(searchInfo);
+    if(searchInfo.title==""&&searchInfo.priority==""&& searchInfo.reporter==""&& searchInfo.status==""){
+        alert("You must enter a search field! Thank You.");
+      }else{
+    this.searchService.searchBug(searchInfo.title,
+      searchInfo.priority, searchInfo.reporter, searchInfo.status).subscribe(result => this.datas = result);
+    }
+  }
 }
 
 

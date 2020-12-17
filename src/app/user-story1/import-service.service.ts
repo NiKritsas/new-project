@@ -8,15 +8,15 @@ import { BugsImport } from './user-story1/bugs-import';
   providedIn: 'root'
 })
 export class ImportServiceService {
-
+  
   constructor(private http: HttpClient) { }
 
   getFields(): Observable<BugsImport[]> {
+     
+    
+    
     return this.http.get<BugsImport[]>('https://bug-report-system-server.herokuapp.com/bugs');
   }
-
-
-
   getSorted(field: string, order : string ): Observable<BugsImport[]> {
     console.log(field,order);
     
@@ -39,9 +39,8 @@ export class ImportServiceService {
   }
   changePage(idx : number):Observable<BugsImport[]>{
     console.log(idx);
-    return this.http.get<BugsImport[]>('https://bug-report-system-server.herokuapp.com/bugs?page=' + idx)
-    
-    
+    return this.http.get<BugsImport[]>('https://bug-report-system-server.herokuapp.com/bugs?page=' + idx) 
   }
+  
   
 }
