@@ -9,7 +9,7 @@ export class AppComponent {
   title = 'AngularProject';
   constructor(private router: Router){}
   refreshHome(){
-    this.router.navigate(['/'])
+    this.router.navigate(['../'])
     
   }
 }

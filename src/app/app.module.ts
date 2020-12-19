@@ -7,11 +7,14 @@ import { CreateNewBugComponent } from './create-newbug/create-new-bug/create-new
 import { UserStory1Component } from './user-story1/user-story1/user-story1.component';
 import { CreateNewbugModule } from './create-newbug/create-newbug.module';
 import { HttpClientModule } from '@angular/common/http';
+import { CanDeactivateGuardService } from './create-newbug/can-deactivate-guard.service';
 
 const routes: Routes = [
   {path: '', component: UserStory1Component},
-  {path: 'createNewBug', component: CreateNewBugComponent},
-  {path: 'editBug/:id', component: CreateNewBugComponent}
+  {path: 'createNewBug', component: CreateNewBugComponent,
+  canDeactivate: [CanDeactivateGuardService]},
+  {path: 'editBug/:id', component: CreateNewBugComponent,
+  canDeactivate: [CanDeactivateGuardService]}
 ]
 
 

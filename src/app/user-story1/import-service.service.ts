@@ -38,7 +38,7 @@ export class ImportServiceService {
     return this.http.delete<void>('https://bug-report-system-server.herokuapp.com/bugs/' + dataId);
   }
   changePage(idx : number):Observable<BugsImport[]>{
-    console.log(idx);
+    //console.log(idx);
     return this.http.get<BugsImport[]>('https://bug-report-system-server.herokuapp.com/bugs?page=' + idx) 
   }
   

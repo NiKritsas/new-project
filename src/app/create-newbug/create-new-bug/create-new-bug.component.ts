@@ -5,6 +5,7 @@ import { BugsImport } from 'src/app/user-story1/user-story1/bugs-import';
 import { ActivatedRoute } from '@angular/router';
 import { ImportServiceService } from 'src/app/user-story1/import-service.service';
 import { Router } from '@angular/router'
+import { BaseComponent } from 'src/app/base-component';
 @Component({
   selector: 'app-create-new-bug',
   templateUrl: './create-new-bug.component.html',
@@ -12,10 +13,10 @@ import { Router } from '@angular/router'
   providers: [PostService, ImportServiceService]
 })
 
-export class CreateNewBugComponent implements OnInit {
-
+export class CreateNewBugComponent implements OnInit ,BaseComponent {
+  //changesSaved:boolean = false;
   newBugForm: FormGroup;
-
+  canDeactivate = () => false;
   service: PostService;
 
   bugId: string;
@@ -27,6 +28,7 @@ export class CreateNewBugComponent implements OnInit {
     private route: ActivatedRoute,
     private bugsService: ImportServiceService,
     private router: Router) { }
+  
 
   get comments() {
     return this.newBugForm.get('comments') as FormArray
@@ -117,7 +119,7 @@ export class CreateNewBugComponent implements OnInit {
   setComments(commentSets: BugsImport['comments']) {
    
     commentSets.forEach(c => {
-     // console.log(c)
+     
      
       this.comments.push(this.fb.group({
         description: c.description,
@@ -128,24 +130,23 @@ export class CreateNewBugComponent implements OnInit {
   }
 
   onSumbit() {
-
+    this.canDeactivate = () => true;
     let newBug: BugsImport = this.newBugForm.value;
-   // console.log(newBug)
+   
     if (this.bugId) {
 
       this.postBug.editBug(this.bugId, newBug).subscribe((result) => {
-
-        //console.log(result)
-        this.router.navigate(['/'])
+        this.router.navigate(['../../'])
+        
       })
     } else {
 
       this.postBug.addBug(newBug).subscribe((result) => {
         console.log(result)
-        this.router.navigate(['/'])
+        this.router.navigate(['../'])
       })
-     // console.log('perase')
-
+      
+     
     }
 
 
