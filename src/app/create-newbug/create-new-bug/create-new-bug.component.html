@@ -55,20 +55,17 @@
 
     <div *ngIf="bugId" class="form-group">
         <h3>Comments</h3>
-        <div *ngFor="let comment of comments.controls; let idx = index" [formGroup]="comment">
-
-            <label>Description:</label>
-            <input formControlName="description" type="text" class="form-control" id="commDescriptionInput"
-                placeholder="Enter description">
-
-            <label>Name:</label>
-            <div class="d-flex align-items-center">
-                <input formControlName="reporter" type="text" class="form-control" id="commNameInput"
-                    placeholder="Enter name">
-                <span class="ml-4"><button class="btn btn-danger" style="border-radius:50%"
-                        (click)="removeComments(idx)"><b>X</b></button></span>
-            </div>
-            <hr>
+        <div  *ngFor="let comment of comments.controls; let idx = index " [formGroup]="comment" >
+            
+                <label>Name:</label>           
+                    <input  class="form-control" formControlName="reporter" type="text" placeholder="Enter name">
+                <label>Description:</label>
+                <div class="d-flex align-items-center">
+                    <input  class="form-control" formControlName="description" type="text" placeholder="Enter description">
+                    <span class="ml-4"><button class="btn btn-danger" style="border-radius:50%"
+                    (click)="removeComments(idx)"><b>X</b></button></span>
+                    <hr>
+                </div>
         </div>
         <hr>
         <button type="button" class="btn btn-dark pull-right" (click)="addComments()">Add Comments</button>

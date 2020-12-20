@@ -1,5 +1,6 @@
 
 <form class="form-inline" [formGroup] = "searchBugForm">
+ 
   <div class="form-group">
     <input formControlName="title" type="text" class="form-control" id="titleInput" placeholder="Search Title">
   </div>
@@ -79,12 +80,11 @@
 
   </table>
  
-  <nav aria-label="Page navigation example">
+  <nav aria-label="Page navigation example" >
     <ul class="pagination justify-content-center">
-      <li class="page-item"><a (click)="changePage(-1)"  class="page-link">&laquo;</a></li>
-      <li class="page-item"><a (click)="changePage(1)"  class="page-link">&raquo;</a></li>
+      <li class="page-item"><a (click)="changePage(-1)"  class="page-link"><b>&laquo;</b></a></li>
+      <li class="page-item"><a (click)="changePage(1)"  class="page-link"><b>&raquo;</b></a></li>
     </ul>
   </nav>
-
 
 </body>

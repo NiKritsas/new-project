@@ -33,7 +33,7 @@ var colPressed: string = " ";
 
 export class UserStory1Component implements OnInit {
 
-  
+
   sortArray: number[] = [0, 0, 0, 0, 0];
   order: string;
 
@@ -87,7 +87,7 @@ export class UserStory1Component implements OnInit {
   searchBugForm: FormGroup;
   datas: BugsImport[];
 
-  constructor(private service: ImportServiceService, private router: Router, private fb: FormBuilder, private searchService: SearchService) {}
+  constructor(private service: ImportServiceService, private router: Router, private fb: FormBuilder, private searchService: SearchService) { }
 
   ngOnInit() {
     this.displayPage()
@@ -122,69 +122,71 @@ export class UserStory1Component implements OnInit {
 
   changePage(incdec: number) {
     pageIndex = pageIndex + incdec;
-    
+
     if (pageIndex >= 0) {
       if (colPressed == " " && isSearching == false) {
         this.service.changePage(pageIndex).subscribe(result => {
           if (result === undefined || result.length == 0) {
             pageIndex--;
-            console.log(pageIndex,isSearching);
+            console.log(pageIndex, isSearching);
           } else {
             console.log(result.length);
             this.datas = [];
             this.datas = result
           }
         });
-      } else if(isSearching == false){
+      } else if (isSearching == false) {
         this.service.getSortedPage(colPressed, this.order, pageIndex).subscribe(result => {
           if (result === undefined || result.length == 0) {
             pageIndex--;
             console.log(pageIndex);
-          } else{
+          } else {
             console.log(result.length);
-            console.log(pageIndex,isSearching);
+            console.log(pageIndex, isSearching);
             this.datas = [];
             this.datas = result
           }
         });
-      }else if(isSearching == true){
+      } else if (isSearching == true) {
         this.searchService.searchBugPage(pageIndex)
-        .subscribe(result => {
-          if (result === undefined || result.length == 0) {
-            pageIndex--;
-            console.log(pageIndex);
-          } else {
-            console.log(pageIndex,isSearching);
-            console.log(result.length);
-            this.datas = [];
-          this.datas = result}});
-        
-        
+          .subscribe(result => {
+            if (result === undefined || result.length == 0) {
+              pageIndex--;
+              console.log(pageIndex);
+            } else {
+              console.log(pageIndex, isSearching);
+              console.log(result.length);
+              this.datas = [];
+              this.datas = result
+            }
+          });
+
+
       }
     } else {
-      pageIndex +=1;
+      pageIndex += 1;
     }
     console.log(incdec);
 
     console.log(pageIndex);
   }
-  
+
   searchBug() {
     var searchInfo = this.searchBugForm.value;
     console.log(searchInfo);
     if (searchInfo.title == "" && searchInfo.priority == "" &&
-        searchInfo.reporter == "" && searchInfo.status == "") {
-        isSearching = false;
-        console.log(isSearching);
-        
-        alert("You must enter a search field!Redirectin to Starting Page.");
-        this.displayPage()
+      searchInfo.reporter == "" && searchInfo.status == "") {
+      isSearching = false;
+      console.log(isSearching);
+
+      alert("You must enter a search field!Redirectin to Starting Page.");
+      this.displayPage()
     } else {
       this.searchService.searchBug(searchInfo.title,
-          searchInfo.priority, searchInfo.reporter, searchInfo.status)
+        searchInfo.priority, searchInfo.reporter, searchInfo.status)
         .subscribe(result => this.datas = result);
-        isSearching = true;
-        console.log(isSearching);
+      isSearching = true;
+      console.log(isSearching);
     }
   }
 }

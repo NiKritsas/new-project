@@ -14,14 +14,14 @@ import { BaseComponent } from 'src/app/base-component';
 })
 
 export class CreateNewBugComponent implements OnInit ,BaseComponent {
-  //changesSaved:boolean = false;
+ 
   newBugForm: FormGroup;
   canDeactivate = () => false;
   service: PostService;
 
   bugId: string;
 
-  //Comments:any;
+  
 
   constructor(private fb: FormBuilder,
     private postBug: PostService,
@@ -30,7 +30,7 @@ export class CreateNewBugComponent implements OnInit ,BaseComponent {
     private router: Router) { }
   
 
-  get comments() {
+  get comments() : FormArray {
     return this.newBugForm.get('comments') as FormArray
   }
 
@@ -43,14 +43,10 @@ export class CreateNewBugComponent implements OnInit ,BaseComponent {
       reporter: ['', Validators.required],
       status: [''],
       comments: this.fb.array([
-        this.commentsInfo()
+        
       ])
 
-
     })
-
-
-
 
     this.newBugForm.get('reporter').valueChanges.subscribe((value) => {
 
@@ -71,20 +67,15 @@ export class CreateNewBugComponent implements OnInit ,BaseComponent {
         this.getBug(this.bugId);
       }
     })
-
-
+  }
+  addComments() {    
+    this.comments.push(this.commentsInfo());     
   }
 
-  addComments() {
+  removeComments(idx: number) {
+   
+    this.comments.removeAt(idx)
     
-    this.comments.push(this.commentsInfo());
-    
-  // console.log('perase')
-  }
-
-  removeComments(index: number) {
-    this.comments.removeAt(index)
-    // console.log('delete')
   }
 
   private commentsInfo(): FormGroup {
@@ -107,34 +98,37 @@ export class CreateNewBugComponent implements OnInit ,BaseComponent {
       description: data.description,
       priority: data.priority,
       reporter: data.reporter,
-      status: data.status,
-     // comments: this.setComments(data.comments)
+      status: data.status      
     });
    
-    this.setComments(data.comments);
-   // this.comments.push(this.setComments(data.comments));
+    this.setComments( data.comments )
     
+   
+       
   }
 
   setComments(commentSets: BugsImport['comments']) {
-   
+    
+      
     commentSets.forEach(c => {
-     
-     
+        
       this.comments.push(this.fb.group({
         description: c.description,
         reporter: c.reporter
       }));
     });
-    
-  }
+  
+}
+   
+   
+  
 
   onSumbit() {
     this.canDeactivate = () => true;
     let newBug: BugsImport = this.newBugForm.value;
    
     if (this.bugId) {
-
+      
       this.postBug.editBug(this.bugId, newBug).subscribe((result) => {
         this.router.navigate(['../../'])
         
@@ -148,11 +142,5 @@ export class CreateNewBugComponent implements OnInit ,BaseComponent {
       
      
     }
-
-
-
   }
-
-
-
 }

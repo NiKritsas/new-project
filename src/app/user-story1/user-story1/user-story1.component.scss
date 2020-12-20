@@ -2,4 +2,18 @@
     display: flex;
     flex-flow: row wrap;
     align-items: center;
+    background-color: rgb(52, 58, 64);
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+  }
+
+  .form-group{
+    margin: auto;
+    
+  }
+  .table table-bordered {
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-width: thick;
+    color :rgb(52, 58, 64)
   }
